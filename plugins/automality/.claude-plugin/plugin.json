@@ -1,0 +1,6 @@
+{
+  "name": "automality",
+  "description": "Felipe's Automality: minimal-first engineering mode (ladder, scope, voice, aliases) plus git-implementor and pitch-reviewer agents.",
+  "version": "1.0.0",
+  "hooks": "./hooks/claude-codex-hooks.json"
+}

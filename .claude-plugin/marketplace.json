@@ -1,0 +1,14 @@
+{
+  "name": "automality",
+  "owner": {
+    "name": "Felipe Cadavid",
+    "url": "https://github.com/cadavidf"
+  },
+  "plugins": [
+    {
+      "name": "automality",
+      "source": "./plugins/automality",
+      "description": "Felipe's Automality: minimal-first engineering mode (ladder, scope, voice, aliases) plus git-implementor and pitch-reviewer agents."
+    }
+  ]
+}

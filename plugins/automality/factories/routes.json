@@ -1,0 +1,25 @@
+{
+  "book": [
+    "~/Dev/BookFactory",
+    "~/Dev/GO37/factories/book",
+    "~/Dev/GO37/factories/monkeys"
+  ],
+  "marketing": [
+    "~/Dev/GO37/factories/marketing",
+    "~/Dev/GO37/factories/magazine",
+    "~/Dev/GO37/factories/editorial",
+    "~/Dev/editorial-factory"
+  ],
+  "apps": [
+    "~/Dev/GO37/factories/apps",
+    "~/Dev/GO37/factories/appfactory",
+    "~/Dev/GO37/apps",
+    "~/bin/appgen",
+    "~/Dev/zentermind-portfolio"
+  ],
+  "audio": [
+    "~/Dev/GO37/factories/music",
+    "~/Dev/GO37/musicfactory",
+    "~/Dev/Automality/automality-apps/audiobook-automality"
+  ]
+}

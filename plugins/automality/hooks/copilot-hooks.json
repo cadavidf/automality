@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "bash": "node \"${PLUGIN_ROOT}/hooks/automality-activate.js\"",
+        "powershell": "node \"${PLUGIN_ROOT}\\hooks\\automality-activate.js\"",
+        "timeoutSec": 5
+      }
+    ],
+    "userPromptSubmitted": [
+      {
+        "type": "command",
+        "bash": "node \"${PLUGIN_ROOT}/hooks/automality-mode-tracker.js\"",
+        "powershell": "node \"${PLUGIN_ROOT}\\hooks\\automality-mode-tracker.js\"",
+        "timeoutSec": 5
+      }
+    ]
+  }
+}
