@@ -24,3 +24,15 @@
 
 - Initial marketplace: git-implementor and pitch-reviewer agents.
 - Ported ponytail hooks/skills/commands into the plugin.
+
+## 1.2.0 — 2026-08-27
+
+- Fixed `automality-delegate-gate.js`: the v1.1.0 gate only checked
+  per-call edit size (300-char threshold), which a session repeatedly
+  stayed just under while cumulatively doing a large amount of
+  hand-implementation across many small edits - exactly the pattern the
+  gate was supposed to prevent. Added persisted, per-project cumulative
+  tracking (600-char running total, 2hr idle reset): once small edits add
+  up past the limit, the next one is denied regardless of its own size,
+  forcing a real delegation checkpoint. Lowered the per-call threshold
+  300->150 too.
