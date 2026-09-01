@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.3.0 — 2026-09-01
+
+- Added two more soft-CLAUDE.md-rule-turned-hook enforcements, same shape as
+  the delegate-gate: `automality-pricing-guard.js` (asks for confirmation on
+  an Edit/Write under a `quote-factory` path that touches a `$`/currency
+  figure — "ask before pricing decisions") and `automality-secret-guard.js`
+  (asks on an Edit/Write/Bash that contains a plausible API key/token/
+  password literal — "no plaintext secrets in chat"). Both `ask` rather than
+  `deny`: pattern-matching a price or a secret is approximate enough that a
+  human call is the right resolution, not a hard block.
+- Added `/automality-doctor`: runs every hook wired in
+  `claude-codex-hooks.json` through its real wrapper command under a
+  deliberately stripped PATH (the exact adverse condition that caused the
+  1.2.1 outage) with synthetic input, and asserts the expected PASS/FAIL —
+  the thing that would have caught the delegate-gate going dark in seconds
+  instead of three-plus weeks. The pass/fail logic lives in
+  `automality-doctor.js`, not in the command's prompt, so results don't
+  depend on model interpretation.
+
 ## 1.2.1 — 2026-09-01
 
 - Fixed the delegate-gate (and every other node-based hook: activate,
