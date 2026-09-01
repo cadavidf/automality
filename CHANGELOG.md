@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.2.1 — 2026-09-01
+
+- Fixed the delegate-gate (and every other node-based hook: activate,
+  mode-tracker, eval) going silently dark since install: all four hook
+  commands guard with `command -v node`, but Claude Code runs hook
+  subprocesses without the login-shell PATH (no `.zprofile`/`.zshrc`
+  sourcing), so on a machine where `node` only lives under a brew-managed
+  dir (`/opt/homebrew/bin`, `/usr/local/bin`), that check silently failed
+  and every hook fell through to `|| exit 0` - a permanent, invisible
+  no-op. The delegate-gate never once denied an edit as a result, even with
+  codex sitting on PATH the whole time. Both the wrapper commands in
+  `claude-codex-hooks.json` and `which()` in `automality-delegate-gate.js`
+  now explicitly extend PATH with the common brew/user-bin dirs before
+  checking, so it fails safe (checks properly) instead of failing open
+  (silently allows everything).
+
 ## 1.2.0 — 2026-08-27
 
 - Fixed `automality-delegate-gate.js`: the v1.1.0 gate only checked

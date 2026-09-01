@@ -43,9 +43,25 @@ const CUMULATIVE_CHARS_LIMIT = 600;
 // from days ago.
 const RESET_AFTER_MS = 2 * 60 * 60 * 1000; // 2 hours
 
+// Hook subprocesses don't get the login-shell PATH (no .zprofile/.zshrc
+// sourcing), so a bare `command -v` here silently says "not found" for
+// binaries that only live in a brew-managed dir - which is exactly how this
+// gate went dark: node itself failed the same PATH check in the wrapper
+// command, so the whole hook no-op'd before ever reaching this function.
+// The wrapper now exports these dirs before invoking node (belt), and this
+// re-checks them directly (suspenders) so the gate still works even if a
+// future edit to the wrapper drops that export.
+const EXTRA_PATH_DIRS = [
+  '/opt/homebrew/bin',
+  '/usr/local/bin',
+  path.join(os.homedir(), '.local/bin'),
+  path.join(os.homedir(), 'bin'),
+];
+
 function which(bin) {
+  const env = { ...process.env, PATH: `${process.env.PATH || ''}:${EXTRA_PATH_DIRS.join(':')}` };
   try {
-    execSync(`command -v ${bin}`, { stdio: ['ignore', 'ignore', 'ignore'] });
+    execSync(`command -v ${bin}`, { stdio: ['ignore', 'ignore', 'ignore'], env });
     return true;
   } catch {
     return false;
